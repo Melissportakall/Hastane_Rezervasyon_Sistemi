@@ -185,16 +185,21 @@ def rapor_view(request):
 def randevu_ekrani(request):
     connection = sqlite3.connect('otomasyon.db')
     cursor = connection.cursor()
-    # randevu_ekrani_doktor fonksiyonunda
-    # hastaKullanici = request.session.get('hastaKullanici')
 
-    select_data_sql='''SELECT * FROM randevu WHERE hastaID = ? '''
+    select_data_sql = '''
+        SELECT randevu.randevuID, randevu.randevuTarihi, randevu.randevuSaati, hasta.hastaAdi AS hastaAdi, doktor.doktorAdi AS doktorAdi, doktor.doktorAlani AS doktorAlani
+        FROM randevu 
+        INNER JOIN doktor ON randevu.doktorID = doktor.doktorID 
+        INNER JOIN hasta ON randevu.hastaID = hasta.hastaID
+        WHERE randevu.hastaID = ?
+    '''
+
     cursor.execute(select_data_sql,(hastaKullanici,))
     randevular = cursor.fetchall()
 
     if randevular is None:
         print("Hata")
-    print(hastaKullanici)
+    print(randevular)
 
     connection.close()
 
@@ -205,7 +210,13 @@ def randevu_ekrani_doktor(request):
     connection = sqlite3.connect('otomasyon.db')
     cursor = connection.cursor()
 
-    select_data_sql='''SELECT * FROM randevu WHERE doktorID = ? AND hastaID IS NOT NULL'''
+    select_data_sql = '''
+        SELECT randevu.randevuID, randevu.randevuTarihi, randevu.randevuSaati, hasta.hastaAdi AS hastaAdi, doktor.doktorAdi AS doktorAdi, doktor.doktorAlani AS doktorAlani
+        FROM randevu 
+        INNER JOIN doktor ON randevu.doktorID = doktor.doktorID 
+        INNER JOIN hasta ON randevu.hastaID = hasta.hastaID
+        WHERE randevu.doktorID = ? AND randevu.hastaID IS NOT NULL
+    '''
     cursor.execute(select_data_sql, (doktorKullanici,))
     randevular = cursor.fetchall()
 
@@ -226,7 +237,13 @@ def randevualkaydet(request):
         connection = sqlite3.connect('otomasyon.db')
         cursor = connection.cursor()
 
-        select_data_sql = '''SELECT * FROM randevu WHERE randevuTarihi = ? AND hastaID IS NULL '''
+        select_data_sql = '''
+            SELECT randevu.randevuID, randevu.randevuTarihi, randevu.randevuSaati, doktor.doktorAdi AS doktorAdi, doktor.doktorAlani AS doktorAlani, doktor.doktorID
+            FROM randevu 
+            INNER JOIN doktor ON randevu.doktorID = doktor.doktorID 
+            WHERE randevu.randevuTarihi = ? AND randevu.hastaID IS NULL
+        '''
+
         cursor.execute(select_data_sql, (received_data['randevutarih'],))
         randevualkaydett = cursor.fetchall()
 
@@ -250,14 +267,16 @@ def randevualekle(request):
     cursor = conn.cursor()
 
     insert_data_sql_randevu = '''
-    INSERT INTO randevu (randevuTarihi,randevuSaati,hastaID,doktorID, doktorAlani) VALUES (?, ?, ?, ?, ?)
+    INSERT INTO randevu (randevuTarihi, randevuSaati, hastaID, doktorID, doktorAlani) VALUES (?, ?, ?, ?, ?)
     '''
+
+    print(veriler)
 
     values = [
         veriler[0],
         veriler[1],
         hastaKullanici,
-        veriler[2],
+        veriler[4],
         veriler[3]
     ]
 
@@ -276,7 +295,7 @@ def randevualekle(request):
     valuesDelete = [
         veriler[0],
         veriler[1],
-        veriler[2],
+        veriler[4],
         veriler[3]
     ]
 
@@ -314,3 +333,8 @@ def randevuiptal(request):
             return JsonResponse({'success': True})
         else:
             return JsonResponse({'success': False, 'error': 'Randevu bulunamadı'})
+
+def yonetici_loginview(request):
+
+    return render(request, 'yoneticiekran.html')
+

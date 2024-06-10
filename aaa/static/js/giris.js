@@ -16,15 +16,12 @@ document.getElementById("login-form").addEventListener("submit", function(event)
             if (xhr.status === 200) {
                 var response = JSON.parse(xhr.responseText);
                 if (response.success) {
-                    // Başarılı giriş
 
                     console.log(response.message);
                 } else {
-                    // Başarısız giriş
                     console.error(response.message);
                 }
             } else {
-                // Hata
                 console.error("Hata kodu: " + xhr.status);
             }
         }

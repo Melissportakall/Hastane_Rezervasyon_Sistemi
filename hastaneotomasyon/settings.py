@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'aaa',
-    #'sslserver',
-    #'django_extensions',
+    'sslserver',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -119,9 +119,9 @@ USE_I18N = True
 
 USE_TZ = True
 
-#SECURE_SSL_REDIRECT = True
-#SESSION_COOKIE_SECURE = True
-#CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 
 # Static files (CSS, JavaScript, Images)

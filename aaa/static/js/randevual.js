@@ -54,6 +54,8 @@ document.getElementById("randevutarih").addEventListener("change", async functio
                         console.log(responseData);
 
                         showSuccessAlert();
+                        alert('Randevu başarıyla alındı.');
+                        location.reload();
 
                     } catch (error) {
                         console.error("There was a problem:", error);
@@ -70,51 +72,6 @@ document.getElementById("randevutarih").addEventListener("change", async functio
         console.error("There was a problem:", error);
     }
 });
-
-function addCheckboxListeners() {
-    var checkboxes = document.querySelectorAll(".form-check-input");
-
-    checkboxes.forEach(function(checkbox) {
-        checkbox.addEventListener("change", async function() {
-            if (!this.checked) {
-                return;
-            }
-
-            var row = this.closest("tr");
-            var cells = row.getElementsByTagName("td");
-            var rowData = [];
-
-            for (var i = 0; i < cells.length - 1; i++) {
-                rowData.push(cells[i].innerText);
-            }
-
-            try {
-                var response = await fetch("/randevualekle/", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        "veriler": rowData,
-                    }),
-                });
-
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-
-                var responseData = await response.json();
-                console.log(responseData);
-
-                // Başarılı mesajını göster
-                showSuccessAlert();
-
-            } catch (error) {
-                console.error("There was a problem:", error);
-            }
-        });
-    });
-}
 
 function showSuccessAlert() {
     var alertDiv = document.getElementById("successAlert");
