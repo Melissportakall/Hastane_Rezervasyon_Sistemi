@@ -1,0 +1,159 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Özel CSS Stilleri */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            /*display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;*/
+            background: url("{% static 'images/saglikarkaplan.jpg' %}");
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 250px; /* Kenar çubuğu genişliği */
+            background-color: #145f6d;
+            color: #fff;
+            z-index: 1; /* İçeriğin önünde olması için */
+        }
+
+        .top-bar {
+            margin-left: 250px;
+            height: 91px; /* Çubuk yüksekliği */
+            background-color: #132e30; /* Çubuk rengi */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .top-bar h1 {
+            color: #fff;
+            font-size: 32px; /* Yazı boyutu */
+            margin: 0; /* Yazı etrafındaki boşlukları kaldır */
+        }
+
+
+        /* İçeriği kaydırmak için */
+        .content {
+            margin-left: 250px; /* Kenar çubuğu genişliği kadar kaydır */
+            /padding: 20px; / İçerik ile kenar çubuğu arasında boşluk bırak */
+        }
+
+        .profile {
+            padding: 20px;
+            background-color: #132e30;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background-color: #666;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+        }
+
+        .user-info h2 {
+            margin: 0;
+        }
+
+        .menu {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .menu li {
+            padding: 10px 20px;
+            border-bottom: 1px solid #555;
+        }
+
+        .menu li:last-child {
+            border-bottom: none;
+        }
+
+        .menu li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        table {
+            width: 100%;
+            max-width: 100%;  /* Tablo maksimum genişliği */
+        }
+        th, td {
+            padding: 8px; /* Hücre içeriği için boşluk */
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="profile">
+            <div class="avatar"></div>
+            <div class="user-info">
+                <h2>{{ isim }}</h2>
+                {% if user_type == 'doktor' %}
+                    <p>Doktor</p>
+                {% elif user_type == 'hasta' %}
+                    <p>Hasta</p>
+                {% endif %}
+            </div>
+        </div>
+        <ul class="menu">
+            <li><a href="{% if user_type == 'doktor' %}{% url 'doctor_loginview' %}{% else %}{% url 'patient_login' %}{% endif %}">Ana Sayfa</a></li>>
+            <li><a href="{% url 'home' %}">Çıkış Yap</a></li>
+        </ul>
+
+    </div>
+
+    <div class="top-bar">
+    <h1>Randevularınız</h1>
+    </div>
+    <div class="content">
+        <table class="table table-dark table-hover table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Randevu Tarihi</th>
+                    <th scope="col">Randevu Saati</th>
+                    <th scope="col">Hasta Adı</th>
+                    <th scope="col">Doktor Adı</th>
+                    <th scope="col">Uzmanlık Alanı</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for randevu in randevular %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ randevu.0 }}</td>
+                    <td>{{ randevu.1 }}</td>
+                    <td>{{ randevu.2 }}</td>
+                    <td>{{ randevu.3 }}</td>
+                    <td>{{ randevu.4 }}</td>
+                    <td>{{ randevu.5 }}</td>
+                    <td><button class="randevuSilButton">İptal Et</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="{% static 'js/randevu.js' %}"></script>
+</body>
+</html>

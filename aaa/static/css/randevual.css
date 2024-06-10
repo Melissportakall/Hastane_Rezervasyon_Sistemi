@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url(saglikarkaplan.jpg);
+}
+
+ .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 250px; /* Kenar çubuğu genişliği */
+            background-color: #145f6d;
+            color: #fff;
+            z-index: 1; /* İçeriğin önünde olması için */
+        }
+
+.profile {
+    padding: 20px;
+    background-color: #132e30;
+    text-align: center;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    background-color: #666;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+}
+
+ /* İçeriği kaydırmak için */
+        .content {
+            margin-left: 250px; /* Kenar çubuğu genişliği kadar kaydır */
+            /padding: 20px; / İçerik ile kenar çubuğu arasında boşluk bırak */
+        }
+
+        .top-bar {
+            margin-left: 250px;
+            height: 91px; /* Çubuk yüksekliği */
+            background-color: #132e30; /* Çubuk rengi */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .top-bar h1 {
+            color: #fff;
+            font-size: 32px; /* Yazı boyutu */
+            margin: 0; /* Yazı etrafındaki boşlukları kaldır */
+        }
+
+.user-info h2 {
+    margin: 0;
+}
+
+.menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #555;
+}
+
+.menu li:last-child {
+    border-bottom: none;
+}
+
+.menu li a {
+    color: #fff;
+    text-decoration: none;
+}
+/* Randevu tarih seçeneğini stilize etmek */
+#randevutarih {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 300px; /* Genişliği ayarlayın */
+    font-size: 16px; /* Yazı tipi boyutunu ayarlayın */
+    margin-top: 20px; /* Ekranın üst kısmından belirli bir mesafe bırakın */
+    position: fixed;
+    top: 0;
+}
+
+/* Randevu al butonunu stilize etmek */
+#randevual-buton {
+    padding: 12px 24px; /* Daha büyük bir buton */
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* Arka plan rengi */
+    color: #fff; /* Yazı rengi */
+    font-size: 18px; /* Yazı tipi boyutu */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Geçiş efekti */
+    margin-top: 20px; /* Ekranın üst kısmından belirli bir mesafe bırakın */
+    position: fixed;
+    top: 50px; /* Tarih alanının altından başlatmak için */
+}
+#overview {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+/* Butonun hover durumunu stilize etmek */
+#randevual-buton:hover {
+    background-color: #0056b3; /* Hover durumunda arka plan rengi */
+}
+
+/* Randevu tarih seçeneğini ve randevu al butonunu yan yana yerleştirmek */
+#overview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+table {
+            width: 100%;
+            max-width: 100%;  /* Tablo maksimum genişliği */
+        }
+        th, td {
+            padding: 8px; /* Hücre içeriği için boşluk */
+        }

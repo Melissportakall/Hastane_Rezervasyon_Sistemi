@@ -1,0 +1,184 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randevu Al</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--link rel="stylesheet" href="{% static 'css/randevual.css' %}"-->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url("{% static 'images/saglikarkaplan.jpg' %}");
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #145f6d;
+            color: #fff;
+            z-index: 1; /* İçeriğin önünde olması için */
+        }
+
+        .profile {
+            padding: 20px;
+            background-color: #132e30;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background-color: #666;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+        }
+
+        .top-bar {
+            margin-left: 250px;
+            height: 91px; /* Çubuk yüksekliği */
+            background-color: #132e30; /* Çubuk rengi */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .top-bar h1 {
+            color: #fff;
+            font-size: 32px; /* Yazı boyutu */
+            margin: 0; /* Yazı etrafındaki boşlukları kaldır */
+        }
+
+        .user-info h2 {
+            margin: 0;
+        }
+
+        .menu {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .menu li {
+            padding: 10px 20px;
+            border-bottom: 1px solid #555;
+        }
+
+        .menu li:last-child {
+            border-bottom: none;
+        }
+
+        .menu li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Randevu tarih seçeneğini stilize etmek */
+        #randevutarih {
+            position: absolute;
+            padding: 10px;
+            margin-left: 390px;
+            margin-top: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 300px; /* Genişliği ayarlayın */
+            font-size: 16px; /* Yazı tipi boyutunu ayarlayın */
+            z-index: 9999;
+        }
+
+        /* Eklenen metin için stil */
+        #tarih-metni {
+            margin-left: 275px;
+            margin-top: 28px;
+            color: #000000;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Yarı saydam beyaz arkaplan */
+        .overlay {
+            position: fixed;
+            margin-top: 8px;
+            margin-left: 258px;
+            width: 480px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.8); /* Beyazın yarı saydam versiyonu */
+            z-index: -9999; /* Metnin önünde olması için */
+            border-radius: 10px; /* Köşeleri yumuşatma */
+        }
+
+        .table {
+            width: 1000px; /* Tablo genişliğini ayarlayın */
+            /*max-width: calc(100% - 270px); /* Kenar çubuğu genişliği kadar sağa it */
+            margin-left: 250px; /* Kenar çubuğu genişliği kadar kaydır */
+            margin-top: 100px;
+        }
+        th, td {
+
+            padding: 8px; /* Hücre içeriği için boşluk */
+        }
+
+        #tabloAlani {
+            display: none;
+        }
+
+        .table tbody tr.highlight td {
+            background-color: #ddd;
+        }
+
+        #successAlert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 300px; /* Bildirimin genişliğini ayarlayın */
+            z-index: 1050; /* Bildirimin diğer içeriklerin üzerinde olmasını sağlar */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Hafif gölge ekleyerek belirginleştirir */
+        }
+
+    </style>
+</head>
+<body>
+     <div class="sidebar">
+        <div class="profile">
+            <div class="avatar"></div>
+            <div class="user-info">
+                <h2>{{ isim }}</h2>
+                <p>Hasta</p>
+            </div>
+        </div>
+        <ul class="menu">
+            <li><a href='{% url 'patient_login' %}'>Ana Sayfa</a></li>
+            <li><a href='{% url 'home' %}'>Çıkış Yap</a></li>
+        </ul>
+    </div>
+    <div class="top-bar">
+        <h1>Randevu Al</h1>
+    </div>
+    <div class="overlay"></div> <!-- Yarı saydam beyaz overlay -->
+    <div id="overview">
+        <form id="randevual">
+            <!--span id="tarih-metni">Tarih Seçiniz: </span-->
+            <input type="date" placeholder="Randevu Tarihi Seçin" class="txt" id="randevutarih">
+            <!--button type="submit" id="randevual-buton">Randevu Al</button-->
+        </form>
+    </div>
+    <div id="tarih-metni">
+       Tarih Seçiniz:
+    </div>
+    <div class="alert alert-${type} alert-dismissible" role="alert">`,
+        <div>${message}</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="content" id="tabloAlani" style="display: none;">
+    </div>
+    <script src="{% static 'js/randevual.js' %}"></script>
+</body>
+</html>
+
+

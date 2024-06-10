@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #randevuAlButton {
+            position: absolute;
+            background-color: #007bff; /* Mavi renk */
+            color: white; /* Beyaz metin rengi */
+            padding: 10px 20px; /* Butonun iç boşluğu */
+            border: none; /* Kenarlık yok */
+            border-radius: 5px; /* Kenar yumuşatma */
+            cursor: pointer; /* İmleç şekli */
+            margin-top: -218px;
+            margin-left: 750px;
+            z-index: 99999;
+        }
+
+        #randevuAlButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <button id="randevuAlButton" onclick="window.location.href='{% url 'randevual' %}'">Randevu Al</button>
+
+    <table class="table table-dark table-hover table-sm">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Randevu Tarihi</th>
+            <th scope="col">Randevu Saati</th>
+            <th scope="col">Doktor Adı</th>
+            <th scope="col">Uzmanlık Alanı</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for randevu in randevualkaydet %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ randevu.1 }}</td>
+            <td>{{ randevu.2 }}</td>
+            <td>{{ randevu.4 }}</td>
+            <td>{{ randevu.5 }}</td>
+            <td><input class="form-check-input" type="radio" name="radioNoLabel" id="checkbox" value="" aria-label="..."></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+<script src="js/randevual.js"></script>
+</body>
+</html>

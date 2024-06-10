@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{% static 'css/hastaekran.css' %}">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="profile">
+            <div class="avatar"></div>
+            <div class="user-info">
+                <h2>{{ isim }}</h2>
+                <p>Hasta</p>
+            </div>
+        </div>
+        <ul class="menu">
+            <li><a href='{% url 'patient_login' %}'>Ana Sayfa</a></li>
+            <li><a href="#">Kişisel Bilgilerim</a></li>
+            <li><a href="#">Hesabımı Sil</a></li>
+            <li><a href='{% url 'home' %}'>Çıkış Yap</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="card" onclick="window.location.href='{% url 'randevu' %}'">
+
+            <h3>Randevularım</h3>
+            <p>Buraya randevu bilgileri gelecek.</p>
+        </div>
+
+        <div class="card" onclick="window.location.href='{% url 'randevual' %}'">
+            <h3>Randevu Al</h3>
+            <p>Buradan randevu alınacak.</p>
+        </div>
+
+        <div class="card" onclick="window.location.href='{% url 'rapor' %}'">
+            <h3>Raporlar</h3>
+            <p>Buraya rapor bilgileri gelecek.</p>
+        </div>
+    </div>
+</body>
+</html>

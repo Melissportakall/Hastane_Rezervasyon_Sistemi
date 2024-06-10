@@ -1,0 +1,63 @@
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hastane Otomasyon Sistemi</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="signup-form">
+        <form id="login-form">
+
+            <h1>Giriş</h1>
+            <input type="text" placeholder="Adınız" class="txt" id="username">
+            <input type="text" placeholder="Soyadınız" class="txt" id="last-name">
+            <input type="password" placeholder="Şifre" class="txt" id="password"> 
+            <div class="select-style">
+                <select id="user-type">
+                    <option value="patient">Hasta</option>
+                    <option value="Yonetici">Yonetici</option>
+                    <option value="doctor">Doktor</option>
+                </select>
+            </div>
+            <input type="submit" value="Giriş Yap" id="login-button">
+
+            <a href="#" id="signup-link"> Hesabınız Yok Mu?</a>
+        </form>
+        <form id="doctor-signup-form" style="display: none;">
+            <!-- Doktor kayıt formu içeriği buraya gelecek -->
+            <h1>Doktor Kayıt</h1>
+            <input type="text" placeholder="Adınız" class="txt" id="doctor_name">
+            <input type="text" placeholder="Soyadınız" class="txt" id="doctor_lastname">
+            <input type="text" placeholder="Uzmanlık Alanı" class="txt" id="doctor_major">
+            <input type="text" placeholder="Çalışılan Hastane" class="txt" id="doctor_hospital">
+            <input type="password" placeholder="Şifre" class="txt" id="doctor_signup_password">
+            <input type="submit" value="Kayıt Ol" id="doctor-signup-button">
+        </form>
+        <form id="patient-signup-form" style="display: none;">
+            <!-- Hasta kayıt formu içeriği buraya gelecek -->
+            <h1>Hasta Kayıt</h1>
+            <input type="text" placeholder="Adınız" class="txt" id="name">
+            <input type="text" placeholder="Soyadınız" class="txt" id="lastname">
+            <select id="gender" name="text">
+                <option value="" disabled selected>Cinsiyet Seçiniz</option>
+                <option value="Erkek">Erkek</option>
+                <option value="Kadın">Kadın</option>
+            </select>
+            <input type="date" placeholder="Doğum Tarihi" class="txt" id="date">
+            <input type="text" placeholder="Telefon No" class="txt" id="phone_no">
+            <textarea placeholder="Adres" class="txt" rows="4" cols="35" id="address"></textarea>
+            <input type="password" placeholder="Şifre" class="txt" id="sign-up-password">
+            <input type="submit" value="Kayıt Ol" id="patient-signup-button">
+        </form>
+    </div>
+    <script src="{% static 'js/giris.js' %}"></script>
+</body>
+</html>
+
+{% endblock %}
